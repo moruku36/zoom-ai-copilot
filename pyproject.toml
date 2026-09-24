@@ -1,0 +1,51 @@
+[project]
+name = "zoom-ai-copilot"
+version = "0.1.0"
+description = "Personal real-time Zoom meeting copilot for macOS"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "sounddevice>=0.5.0",
+    "numpy>=2.0.0",
+    "openai>=1.60.0",
+    "elevenlabs>=1.50.0",
+    "python-dotenv>=1.0.1",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.7.0",
+    "websockets>=14.0",
+    "httpx>=0.28.0",
+    "PySide6>=6.8.0",
+]
+
+[project.scripts]
+zoom-ai-copilot = "zoom_ai_copilot.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/zoom_ai_copilot"]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+    "pytest-qt>=4.4.0",
+    "ruff>=0.9.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = ["E501"]
+
